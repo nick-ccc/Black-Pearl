@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+set -e
+
+echo "Checking staged secret files..."
+
+for file in $(git diff --cached --name-only --diff-filter=ACM -- 'secrets/*'); do
+    if ! grep -q '^sops:' "$file" 2>/dev/null; then
+        echo
+        echo "ERROR: $file is not SOPS encrypted!"
+        echo
+        echo "Encrypt it with:"
+        echo "  sops -e -i $file"
+        echo
+        exit 1
+    fi
+done
+
+echo "SOPS check passed."
