@@ -18,7 +18,7 @@ done < <(git diff --cached --name-only --diff-filter=ACM -- 'secrets/*')
 
 
 # 2. Look for obvious plaintext secret fields in staged files.
-if git diff --cached --unified=0 |
+if git diff --staged --unified=0 |
     grep -E '^\+[^+].*(password|passwd|token|secret|api[_-]?key)[[:space:]]*:' |
     grep -vE '^[+].*(password|passwd|token|secret|api[_-]?key)[[:space:]]*:[[:space:]]*($|null|""|'\'''\''|<[^>]+>)'
 then
