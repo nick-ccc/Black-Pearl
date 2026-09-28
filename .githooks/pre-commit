@@ -1,19 +1,25 @@
 #!/usr/bin/env bash
 
-set -e
+set -euo pipefail
 
-echo "Checking staged secret files..."
+echo "Running secret checks..."
 
-for file in $(git diff --cached --name-only --diff-filter=ACM -- 'secrets/*'); do
-    if ! grep -q '^sops:' "$file" 2>/dev/null; then
-        echo
-        echo "ERROR: $file is not SOPS encrypted!"
-        echo
-        echo "Encrypt it with:"
-        echo "  sops -e -i $file"
-        echo
+# 1. Make sure files under secrets/ are actually SOPS encrypted
+while IFS= read -r file; do
+    [[ -z "$file" ]] && continue
+    [[ "$file" == "secrets/.gitkeep" ]] && continue
+
+    if ! sops -d "$file" >/dev/null 2>&1; then
+        echo "ERROR: $file is not a valid SOPS-encrypted file."
         exit 1
     fi
-done
+done < <(git diff --cached --name-only --diff-filter=ACM -- 'secrets/*')
 
-echo "SOPS check passed."
+# 2. Scan staged changes for plaintext secrets
+if ! gitleaks git --staged --redact; then
+    echo
+    echo "ERROR: Potential secret detected in staged changes."
+    exit 1
+fi
+
+echo "Secret checks passed."
