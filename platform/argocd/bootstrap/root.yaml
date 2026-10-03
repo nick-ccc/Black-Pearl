@@ -9,7 +9,7 @@ spec:
   source:
     repoURL: git@github.com:nick-ccc/Black-Pearl.git
     targetRevision: HEAD
-    path: platforms/argocd
+    path: platforms/argocd/cluster-apps
 
   destination:
     server: https://kubernetes.default.svc

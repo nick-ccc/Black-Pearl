@@ -1,0 +1,65 @@
+global:
+  image:
+    tag: "2026.8"
+
+authentik:
+  error_reporting:
+    enabled: false
+  existingSecret:
+    secreatName: authentik-secrets
+
+server:
+  replicas: 1
+
+  resources:
+    requests:
+      cpu: 100m
+      memory: 256Mi
+    limits:
+      cpu: 1000m
+      memory: 1Gi
+
+  ingress:
+    enabled: false
+
+worker:
+  replicas: 1
+
+  resources:
+    requests:
+      cpu: 100m
+      memory: 256Mi
+    limits:
+      cpu: 1000m
+      memory: 1Gi
+
+postgresql:
+  enabled: true
+
+  auth:
+    username: authentik
+    database: authentik
+
+  primary:
+    persistence:
+      enabled: true
+      size: 10Gi
+      storageClass: standard
+
+    resources:
+      requests:
+        cpu: 100m
+        memory: 256Mi
+      limits:
+        cpu: 500m
+        memory: 512Mi
+
+persistence:
+  enabled: true
+  size: 5Gi
+  storageClass: standard
+  accessModes:
+    - ReadWriteOnce
+
+podDisruptionBudget:
+  enabled: false

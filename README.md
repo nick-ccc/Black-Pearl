@@ -6,5 +6,12 @@ kubectl apply --server-side -n argocd \
   -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
 
 # 3. Hand control to GitOps
-kubectl apply -f bootstrap/argocd/root.yaml
+kubectl apply -f platfrom/argocd/bootstrap/root.yaml
+```
+
+
+```
+source .envrc
+
+spos --encrypt <secret>.yaml > <secret>.enc.yaml
 ```

@@ -1,0 +1,22 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Applicatoin
+metadata:
+  name: authentik
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: git@github.com:nick-ccc/Black-Pearl.git
+    targetRevision: main
+    path: 
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: authentik
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
