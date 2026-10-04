@@ -2,10 +2,7 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 namespace: authentik
 generators:
-  - secret-
-resources:
-  - namespace.yaml
-  - ../../secrets/authentik-secret.enc.yaml
+  - ksops-config.yaml
 helmCharts:
   - name: authentik
     releaseName: authentik
