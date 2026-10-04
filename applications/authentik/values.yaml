@@ -45,7 +45,7 @@ postgresql:
     persistence:
       enabled: true
       size: 10Gi
-      storageClass: standard
+      storageClass: local-path
 
     resources:
       requests:
@@ -58,7 +58,7 @@ postgresql:
 persistence:
   enabled: true
   size: 5Gi
-  storageClass: standard
+  storageClass: local-path
   accessModes:
     - ReadWriteOnce
 
