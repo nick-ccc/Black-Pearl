@@ -8,36 +8,43 @@ spec:
     spec:
       initContainers:
         - name: install-ksops
-          image: viaductoss/ksops:v4.3.1
-          command: ["/bin/sh", "-c"]
+          image: viaductoss/ksops:v4.5.1
+          command:
+            - /usr/local/bin/ksops
           args:
-            - |
-              echo "Installing KSOPS...";
-              cp ksops /custom-tools/;
-              cp kustomize /custom-tools/;
-              chmod +x /custom-tools/ksops;
-              chmod +x /custom-tools/kustomize;
-              echo "Done.";
+            - install
+            - /custom-tools
           volumeMounts:
             - mountPath: /custom-tools
               name: custom-tools
 
+        - name: install-kustomize
+          image: registry.k8s.io/kustomize/kustomize:v5.8.1
+          command:
+            - /bin/sh
+            - -c
+          args:
+            - |
+              cp /app/kustomize /custom-tools/kustomize
+              chmod +x /custom-tools/kustomize
+          volumeMounts:
+            - name: custom-tools
+              mountPath: /custom-tools
+
       containers:
         - name: argocd-repo-server
           env:
-            - name: XDG_CONFIG_HOME
-              value: /.config
             - name: SOPS_AGE_KEY_FILE
               value: /sops-age/key.txt
 
           volumeMounts:
-            - mountPath: /usr/local/bin/kustomize
-              name: custom-tools
-              subPath: kustomize
-
             - mountPath: /usr/local/bin/ksops
               name: custom-tools
               subPath: ksops
+
+            - name: custom-tools
+              mountPath: /usr/local/bin/kustomize
+              subPath: kustomize
 
             - mountPath: /sops-age
               name: sops-age

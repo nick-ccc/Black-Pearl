@@ -7,4 +7,4 @@ metadata:
       exec:
         path: /usr/local/bin/ksops
 files:
-  - ../../secrets/applications/secret.enc.yaml
+  - ../../secrets/applications/authentik-secrets.enc.yaml
