@@ -8,7 +8,7 @@ spec:
   source:
     repoURL: git@github.com:nick-ccc/Black-Pearl.git
     targetRevision: main
-    path: 
+    path: applications/authentick 
 
   destination:
     server: https://kubernetes.default.svc
