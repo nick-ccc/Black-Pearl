@@ -11,6 +11,10 @@ kubectl apply --server-side -n argocd \
 
 # 3. Hand control to GitOps
 kubectl apply -f platfrom/argocd/bootstrap/root.yaml
+
+ kubectl patch deployment -n argocd argocd-repo-server --patch-file platform/argocd/plugins/repo-server-patch.yaml
+kubectl rollout restart deployment -n argocd argocd-repo-server argocd-server && kubectl rollout restart sts -n argo
+cd argocd-application-controller
 ```
 
 

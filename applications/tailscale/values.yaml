@@ -1,0 +1,70 @@
+global:
+  image:
+    tag: "2026.8"
+
+oauthSecretVolume:
+  secret:
+    name: tailscale-oauth
+
+authentik:
+  error_reporting:
+    enabled: false
+  existingSecret:
+    secretName: authentik-secrets
+
+server:
+  replicas: 1
+  resources:
+    requests:
+      cpu: 100m
+      memory: 256Mi
+    limits:
+      cpu: 1000m
+      memory: 1Gi
+  ingress:
+    enabled: false
+
+worker:
+  replicas: 1
+  resources:
+    requests:
+      cpu: 100m
+      memory: 256Mi
+    limits:
+      cpu: 1000m
+      memory: 1Gi
+
+postgresql:
+  enabled: true
+
+  auth:
+    username: authentik
+    database: authentik
+    existingSecret: authentik-secrets
+    secretKeys:
+      adminPasswordKey: postgresql__password
+      userPasswordKey: postgresql__password
+
+  primary:
+    persistence:
+      enabled: true
+      size: 10Gi
+      storageClass: local-path
+
+    resources:
+      requests:
+        cpu: 100m
+        memory: 256Mi
+      limits:
+        cpu: 500m
+        memory: 512Mi
+
+persistence:
+  enabled: true
+  size: 5Gi
+  storageClass: local-path
+  accessModes:
+    - ReadWriteOnce
+
+podDisruptionBudget:
+  enabled: false
