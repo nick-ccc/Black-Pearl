@@ -1,7 +1,7 @@
 apiVersion: viaduct.ai/v1
 kind: ksops
 metadata:
-  name: tailscale-oauth
+  name: operator-oauth
   annotations:
     config.kubernetes.io/function: |
       exec:
