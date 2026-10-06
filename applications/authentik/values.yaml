@@ -2,6 +2,10 @@ global:
   image:
     tag: "2026.8"
 
+oauthSecretVolume:
+  secret:
+    name: tailscale-oauth
+
 authentik:
   error_reporting:
     enabled: false

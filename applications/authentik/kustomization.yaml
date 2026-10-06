@@ -3,6 +3,9 @@ kind: Kustomization
 
 namespace: authentik
 
+resources:
+  - ingress.yaml
+
 generators:
   - ksops-config.yaml
 
