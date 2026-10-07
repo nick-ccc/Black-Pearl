@@ -31,4 +31,4 @@ spec:
             claimName: actual-pvc
         - name: tls
           secret:
-            secretName: tracking-secret-tls
+            secretName: actual-secrets
