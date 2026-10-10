@@ -27,7 +27,7 @@ spec:
     spec:
       project: platform
       source:
-        repoURL: https://github.com/nick-ccc/Black-Pearl.gitt
+        repoURL: https://github.com/nick-ccc/Black-Pearl.git
         targetRevision: main
         path: '{{ path }}'
         kustomize: {}
