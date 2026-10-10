@@ -8,6 +8,7 @@ generators:
 
 resources:
   - dnsconfig.yaml
+  - coredns-custom.yaml
 
 helmCharts:
   - name: tailscale-operator
