@@ -5,6 +5,7 @@ namespace: authentik
 
 resources:
   - ingress.yaml
+  - oidc-egress.yaml
 
 generators:
   - ksops-config.yaml
