@@ -6,11 +6,13 @@ metadata:
 spec:
   project: default
 
-  source:
-    repoURL: git@github.com:nick-ccc/Black-Pearl.git
-    targetRevision: HEAD
-    path: platform/
-
+  sources:
+    - repoURL: git@github.com:nick-ccc/Black-Pearl.git
+      targetRevision: HEAD
+      path: platform/
+    - repoURL: git@github.com:nick-ccc/Black-Pearl.git
+      targetRevision: main
+      path: applications
   destination:
     server: https://kubernetes.default.svc
     namespace: argocd
