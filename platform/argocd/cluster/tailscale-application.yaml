@@ -8,7 +8,7 @@ spec:
   source:
     repoURL: git@github.com:nick-ccc/Black-Pearl.git
     targetRevision: main
-    path: applications/tailscale 
+    path: platform/tailscale 
 
   destination:
     server: https://kubernetes.default.svc
