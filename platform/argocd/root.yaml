@@ -6,10 +6,10 @@ metadata:
 spec:
   project: default
 
-  sources:
+  source:
     repoURL: git@github.com:nick-ccc/Black-Pearl.git
     targetRevision: HEAD
-    path: platform/argocd/cluster
+    path: platform/
 
   destination:
     server: https://kubernetes.default.svc

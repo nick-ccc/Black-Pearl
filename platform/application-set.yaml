@@ -1,0 +1,46 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  namespace: argocd
+  name: infrastructure
+  labels:
+    app.kubernetes.io/part-of: infrastructure
+    app.kubernetes.io/managed-by: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: '-1'
+spec:
+  generators:
+    - git:
+        repoURL: https://github.com/nick-ccc/Black-Pearl.git
+        revision: main
+        directories:
+          # - path: platform/argocod #Todo clean up bootstrap
+          - path: platform/authentik
+          - path: platform/tailscale
+  template:
+    metadata:
+      name: 'platform-{{ path.basename }}'
+      namespace: argocd
+      labels:
+        app.kubernetes.io/component: 'platform'
+        app.kubernetes.io/part-of: infrastructure
+    spec:
+      project: platform
+      source:
+        repoURL: https://github.com/nick-ccc/Black-Pearl.gitt
+        targetRevision: main
+        path: '{{ path }}'
+        kustomize: {}
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: '{{ .path.basename }}'
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+          - CreateNamespace=true
+          - ApplyOutOfSyncOnly=true
+          - ServerSideApply=true
+          - PruneLast=true
+          - RespectIgnoreDifferences=true
