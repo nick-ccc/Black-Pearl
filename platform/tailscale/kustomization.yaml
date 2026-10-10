@@ -6,6 +6,9 @@ namespace: tailscale
 generators:
   - ksops-config.yaml
 
+resources:
+  - dnsconfig.yaml
+
 helmCharts:
   - name: tailscale-operator
     releaseName: tailscale-operator
