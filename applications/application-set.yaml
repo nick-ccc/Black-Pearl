@@ -1,0 +1,46 @@
+
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  namespace: argocd
+  name: applications
+  labels:
+    app.kubernetes.io/part-of: applications
+    app.kubernetes.io/managed-by: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: '2'
+spec:
+  goTemplate: True
+  generators:
+    - git:
+        repoURL: https://github.com/nick-ccc/Black-Pearl.git
+        revision: main
+        directories:
+          - path: appplications/actual
+  template:
+    metadata:
+      name: 'applications-{{ .path.basename }}'
+      namespace: argocd
+      labels:
+        app.kubernetes.io/component: 'applications'
+        app.kubernetes.io/part-of: infrastructure
+    spec:
+      project: applications
+      source:
+        repoURL: https://github.com/nick-ccc/Black-Pearl.git
+        targetRevision: main
+        path: '{{ .path.path }}'
+        kustomize: {}
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: '{{ .path.basename }}'
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+          - CreateNamespace=true
+          - ApplyOutOfSyncOnly=true
+          - ServerSideApply=true
+          - PruneLast=true
+          - RespectIgnoreDifferences=true
