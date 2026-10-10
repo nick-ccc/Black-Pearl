@@ -4,6 +4,8 @@ kind: AppProject
 metadata:
   name: platform
   namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "-2"
 spec:
   description: Homelab platform infrastructure to build applications on top of/with
 
