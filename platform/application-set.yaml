@@ -20,7 +20,7 @@ spec:
           - path: platform/tailscale
   template:
     metadata:
-      name: 'platform-{{ path.basename }}'
+      name: 'platform-{{ .path.basename }}'
       namespace: argocd
       labels:
         app.kubernetes.io/component: 'platform'
@@ -30,11 +30,11 @@ spec:
       source:
         repoURL: https://github.com/nick-ccc/Black-Pearl.git
         targetRevision: main
-        path: '{{ path }}'
+        path: '{{ .path }}'
         kustomize: {}
       destination:
         server: https://kubernetes.default.svc
-        namespace: '{{ path.basename }}'
+        namespace: '{{ .path.basename }}'
       syncPolicy:
         automated:
           prune: true
