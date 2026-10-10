@@ -2,9 +2,9 @@ apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
   namespace: argocd
-  name: infrastructure
+  name: platform
   labels:
-    app.kubernetes.io/part-of: infrastructure
+    app.kubernetes.io/part-of: platfrom
     app.kubernetes.io/managed-by: argocd
   annotations:
     argocd.argoproj.io/sync-wave: '-1'
