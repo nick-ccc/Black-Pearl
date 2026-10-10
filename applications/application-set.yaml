@@ -16,14 +16,14 @@ spec:
         repoURL: https://github.com/nick-ccc/Black-Pearl.git
         revision: main
         directories:
-          - path: appplications/actual
+          - path: applications/actual
   template:
     metadata:
       name: 'applications-{{ .path.basename }}'
       namespace: argocd
       labels:
         app.kubernetes.io/component: 'applications'
-        app.kubernetes.io/part-of: infrastructure
+        app.kubernetes.io/part-of: applications
     spec:
       project: applications
       source:

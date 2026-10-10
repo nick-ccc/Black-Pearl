@@ -24,7 +24,7 @@ spec:
       namespace: argocd
       labels:
         app.kubernetes.io/component: 'platform'
-        app.kubernetes.io/part-of: infrastructure
+        app.kubernetes.io/part-of: platform
     spec:
       project: platform
       source:
