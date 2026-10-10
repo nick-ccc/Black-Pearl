@@ -18,6 +18,7 @@ spec:
           # - path: platform/argocod #Todo clean up bootstrap
           - path: platform/authentik
           - path: platform/tailscale
+          - path: platform/kube-system
   template:
     metadata:
       name: 'platform-{{ .path.basename }}'
