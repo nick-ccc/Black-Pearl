@@ -41,7 +41,8 @@ After bootstrap, Argo CD reconciles the root Application and its child Applicati
 ### Secret Encryption with SOPS
 
 
-> [!NOTE] KSOPS is installed and configured during the Argo CD bootstrap process, allowing Argo CD to decrypt and deploy SOPS-encrypted secrets during GitOps reconciliation. Commit only encrypted secrets to Git; keep plaintext secrets and encryption keys out of version control.
+> [!NOTE] 
+> KSOPS is installed and configured during the Argo CD bootstrap process, allowing Argo CD to decrypt and deploy SOPS-encrypted secrets during GitOps reconciliation. Commit only encrypted secrets to Git; keep plaintext secrets and encryption keys out of version control.
 
 
 Use SOPS to encrypt Kubernetes secrets before committing them to Git. Load the repository environment and encrypt plaintext YAML files:
