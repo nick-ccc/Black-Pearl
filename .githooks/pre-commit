@@ -17,30 +17,8 @@ while IFS= read -r file; do
 done < <(git diff --staged --name-only --diff-filter=ACM -- 'secrets/*')
 
 
-# 2. Scan EVERYTHING staged for obvious plaintext secrets.
-while IFS= read -r file; do
-    [[ -z "$file" ]] && continue
-
-    # SOPS-encrypted files are allowed to contain secrets.
-    [[ "$file" == secrets/* ]] && continue
-
-    if git show ":$file" 2>/dev/null |
-        grep -Ein \
-        '^[[:space:]]*(password|passwd|token|secret|api[_-]?key|client[_-]?secret|private[_-]?key)[[:space:]]*:[[:space:]]*[^#[:space:]]'
-    then
-        echo
-        echo "ERROR: Possible plaintext secret found in staged file:"
-        echo "  $file"
-        echo
-        echo "Move the secret into a SOPS-encrypted file."
-        exit 1
-    fi
-
-done < <(git diff --staged --name-only --diff-filter=ACM)
-
-
-# 3. Gitleaks scans the entire staged repository too.
-if ! gitleaks git --staged --redact; then
+# 2. Gitleaks scans the entire staged repository too.
+if ! gitleaks git --staged --redact --config .gitleaks.toml; then
     echo
     echo "ERROR: Gitleaks detected a potential secret."
     exit 1

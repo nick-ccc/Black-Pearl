@@ -7,4 +7,4 @@ metadata:
       exec:
         path: /usr/local/bin/ksops
 files:
-  - ../../secrets/infrastructure/grafana-secrets.enc.yaml
+  - ../../secrets/infrastructure/granfana-secrets.enc.yaml
