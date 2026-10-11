@@ -1,0 +1,20 @@
+replicas: 1
+
+service:
+  type: ClusterIP
+  port: 80
+
+persistence:
+  enabled: true
+  type: pvc
+  size: 5Gi
+  storageClassName: local-path
+
+ingress:
+  enabled: false
+
+sidecar:
+  dashboards:
+    enabled: true
+    label: grafana_dashboard
+    labelValue: "1"
