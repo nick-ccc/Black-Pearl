@@ -15,11 +15,9 @@ spec:
         repoURL: https://github.com/nick-ccc/Black-Pearl.git
         revision: main
         directories:
-          # - path: infrastructure/argocod #Todo clean up bootstrap
-          - path: infrastructure/authentik
-          - path: infrastructure/tailscale
-          - path: infrastructure/kube-system
-          - path: infrastructure/grafana
+          - path: infrastructure/argocod/
+            exclude: true
+          - path: infrastructure/*
   template:
     metadata:
       name: 'infrastructure-{{ .path.basename }}'

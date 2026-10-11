@@ -24,8 +24,8 @@ datasources:
     apiVersion: 1
     datasources:
       - name: Prometheus
+        uid: prometheus
         type: prometheus
         access: proxy
-        url: http://prometheus-kube-prometheus-prometheus.monitoring.svc.cluster.local:9090
+        url: http://kube-prometheus-stack-prometheus.prometheus.svc.cluster.local:9090
         isDefault: true
-        editable: false
