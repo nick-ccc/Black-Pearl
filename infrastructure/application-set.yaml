@@ -15,10 +15,11 @@ spec:
         repoURL: https://github.com/nick-ccc/Black-Pearl.git
         revision: main
         directories:
-          - path: infrastructure/*
-          # Exclude bootstrap configuration
-          - path: infrastructure/argocod
-            exclude: true
+          # - path: infrastructure/argocod #Todo clean up bootstrap
+          - path: infrastructure/authentik
+          - path: infrastructure/tailscale
+          - path: infrastructure/kube-system
+          - path: infrastructure/grafana
   template:
     metadata:
       name: 'infrastructure-{{ .path.basename }}'

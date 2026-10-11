@@ -16,7 +16,7 @@ spec:
         repoURL: https://github.com/nick-ccc/Black-Pearl.git
         revision: main
         directories:
-          - path: applications/actual
+          - path: applications/*
   template:
     metadata:
       name: 'applications-{{ .path.basename }}'
