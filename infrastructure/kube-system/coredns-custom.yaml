@@ -8,5 +8,5 @@ data:
     ts.net:53 {
       errors
       cache 30
-      forward . 10.43.70.23
+      forward . 10.43.182.204
     }
