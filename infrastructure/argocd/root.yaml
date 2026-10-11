@@ -9,10 +9,10 @@ spec:
   sources:
     - repoURL: git@github.com:nick-ccc/Black-Pearl.git
       targetRevision: HEAD
-      path: platform/
+      path: infrastructure/
     - repoURL: git@github.com:nick-ccc/Black-Pearl.git
       targetRevision: main
-      path: applications
+      path: applications/
   destination:
     server: https://kubernetes.default.svc
     namespace: argocd

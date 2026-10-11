@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
   namespace: argocd
-  name: platform
+  name: infrastructure
   labels:
     app.kubernetes.io/part-of: platfrom
     app.kubernetes.io/managed-by: argocd
@@ -15,19 +15,19 @@ spec:
         repoURL: https://github.com/nick-ccc/Black-Pearl.git
         revision: main
         directories:
-          # - path: platform/argocod #Todo clean up bootstrap
-          - path: platform/authentik
-          - path: platform/tailscale
-          - path: platform/kube-system
+          # - path: infrastructure/argocod #Todo clean up bootstrap
+          - path: infrastructure/authentik
+          - path: infrastructure/tailscale
+          - path: infrastructure/kube-system
   template:
     metadata:
-      name: 'platform-{{ .path.basename }}'
+      name: 'infrastructure-{{ .path.basename }}'
       namespace: argocd
       labels:
-        app.kubernetes.io/component: 'platform'
-        app.kubernetes.io/part-of: platform
+        app.kubernetes.io/component: 'infrastructure'
+        app.kubernetes.io/part-of: infrastructure
     spec:
-      project: platform
+      project: infrastructure
       source:
         repoURL: https://github.com/nick-ccc/Black-Pearl.git
         targetRevision: main

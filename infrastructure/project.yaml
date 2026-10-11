@@ -1,12 +1,12 @@
 apiVersion: argoproj.io/v1alpha1
 kind: AppProject
 metadata:
-  name: platform
+  name: infrastructure
   namespace: argocd
   annotations:
     argocd.argoproj.io/sync-wave: "-2"
 spec:
-  description: Homelab platform infrastructure to build applications on top of/with
+  description: Homelab infrastructure infrastructure to build applications on top of/with
 
   sourceRepos:
     - https://github.com/nick-ccc/Black-Pearl.git

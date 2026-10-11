@@ -24,11 +24,11 @@ kubectl apply --server-side -n argocd \
   -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
 
 # Apply root Application to hand over to GitOps
-kubectl apply -f platform/argocd/bootstrap/root.yaml
+kubectl apply -f infrastructure/argocd/bootstrap/root.yaml
 
 # Configure repository server plugins
 kubectl patch deployment -n argocd argocd-repo-server \
-  --patch-file platform/argocd/plugins/repo-server-patch.yaml
+  --patch-file infrastructure/argocd/plugins/repo-server-patch.yaml
 
 # Restart components to load updated configuration
 kubectl rollout restart deployment -n argocd \
