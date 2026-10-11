@@ -4,7 +4,7 @@
 
 <p align="center">
   <a href="https://github.com/nick-ccc/Black-Pearl">
-    <img src="./assets/black-pearl.gif" alt="Black Pearl" width="200" />
+    <img src=".assets/black-pearl.gif" alt="Black Pearl" width="200" />
   </a>
 </p>
 
