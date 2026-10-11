@@ -19,9 +19,11 @@ sidecar:
     label: grafana_dashboard
     labelValue: "1"
 
-
 envFromSecret: grafana-authentik-oauth    
 grafana.ini:
+  server:
+      root_url: "https://grafana.komodo-salak.ts.net"
+
   auth:
     signout_redirect_url: "https://authentik.komodo-salak.ts.net/application/o/grafana/end-session/"
     oauth_auto_login: true
