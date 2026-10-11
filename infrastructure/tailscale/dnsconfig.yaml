@@ -7,6 +7,3 @@ spec:
     image:
       repo: tailscale/k8s-nameserver
       tag: unstable
-  service:
-      # Preserce the IP from changing
-      clusterIP: "10.43.182.204"
