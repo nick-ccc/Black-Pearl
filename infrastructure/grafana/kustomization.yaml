@@ -22,5 +22,8 @@ configMapGenerator:
       labels:
         grafana_dashboard: "1"
 
+generators:
+  - ksops-config.yaml
+
 generatorOptions:
   disableNameSuffixHash: true

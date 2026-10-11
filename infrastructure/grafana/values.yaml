@@ -19,6 +19,24 @@ sidecar:
     label: grafana_dashboard
     labelValue: "1"
 
+
+envFromSecret: grafana-authentik-oauth    
+grafana.ini:
+  auth:
+    signout_redirect_url: "https://authentik.komodo-salak.ts.net/application/o/grafana/end-session/"
+    oauth_auto_login: true
+
+  auth.generic_oauth:
+    name: authentik
+    enabled: true
+    client_id: "$__env{GF_AUTH_GENERIC_OAUTH_CLIENT_ID}"
+    client_secret: "$__env{GF_AUTH_GENERIC_OAUTH_CLIENT_SECRET}"
+    scopes: "openid profile email entitlements"
+    auth_url: "https://authentik.komodo-salak.ts.net/application/o/authorize/"
+    token_url: "https://authentik.komodo-salak.ts.net/application/o/token/"
+    api_url: "https://authentik.komodo-salak.ts.net/application/o/userinfo/"
+    role_attribute_path: "contains(entitlements[*], 'Grafana Admins') && 'Admin' || contains(entitlements[*], 'Grafana Editors') && 'Editor' || 'Viewer'"
+
 datasources:
   datasources.yaml:
     apiVersion: 1
