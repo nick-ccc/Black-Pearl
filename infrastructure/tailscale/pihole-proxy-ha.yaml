@@ -1,0 +1,50 @@
+apiVersion: tailscale.com/v1alpha1
+kind: ProxyClass
+metadata:
+  name: pihole-dns-proxy
+spec:
+  statefulSet:
+    pod:
+      labels:
+        app.kubernetes.io/name: pihole-dns-proxy
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchLabels:
+                  app.kubernetes.io/name: pihole-dns-proxy
+              topologyKey: kubernetes.io/hostname
+      topologySpreadConstraints:
+        - maxSkew: 1
+          topologyKey: kubernetes.io/hostname
+          whenUnsatisfiable: DoNotSchedule
+          labelSelector:
+            matchLabels:
+              app.kubernetes.io/name: pihole-dns-proxy
+      tailscaleContainer:
+        resources:
+          requests:
+            cpu: 100m
+            memory: 128Mi
+          limits:
+            cpu: 500m
+            memory: 256Mi
+---
+apiVersion: tailscale.com/v1alpha1
+kind: ProxyGroup
+metadata:
+  name: pihole-dns-proxies
+spec:
+  type: ingress
+  replicas: 2
+  proxyClass: pihole-dns-proxy
+---
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: pihole-dns-proxies
+spec:
+  minAvailable: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: pihole-dns-proxy

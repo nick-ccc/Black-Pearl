@@ -8,6 +8,7 @@ generators:
 
 resources:
   - dnsconfig.yaml
+  - pihole-proxy-ha.yaml
 
 helmCharts:
   - name: tailscale-operator

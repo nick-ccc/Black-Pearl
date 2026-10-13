@@ -1,0 +1,58 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: pihole-dns
+  labels:
+    app.kubernetes.io/name: pihole
+spec:
+  clusterIP: None
+  selector:
+    app.kubernetes.io/name: pihole
+  ports:
+    - name: dns-tcp
+      port: 53
+      targetPort: dns-tcp
+      protocol: TCP
+    - name: dns-udp
+      port: 53
+      targetPort: dns-udp
+      protocol: UDP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: pihole-dns-tailnet
+  labels:
+    app.kubernetes.io/name: pihole
+  annotations:
+    tailscale.com/hostname: pihole-dns
+    tailscale.com/proxy-group: pihole-dns-proxies
+spec:
+  type: LoadBalancer
+  loadBalancerClass: tailscale
+  selector:
+    app.kubernetes.io/name: pihole
+  ports:
+    - name: dns-tcp
+      port: 53
+      targetPort: dns-tcp
+      protocol: TCP
+    - name: dns-udp
+      port: 53
+      targetPort: dns-udp
+      protocol: UDP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: pihole-admin
+  labels:
+    app.kubernetes.io/name: pihole
+spec:
+  selector:
+    app.kubernetes.io/name: pihole
+  ports:
+    - name: http
+      port: 80
+      targetPort: http
+      protocol: TCP

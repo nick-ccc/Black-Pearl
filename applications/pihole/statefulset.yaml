@@ -1,0 +1,82 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: pihole
+  labels:
+    app.kubernetes.io/name: pihole
+    app.kubernetes.io/part-of: pihole
+spec:
+  serviceName: pihole-dns
+  replicas: 2
+  podManagementPolicy: Parallel
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: pihole
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: pihole
+        app.kubernetes.io/part-of: pihole
+    spec:
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchLabels:
+                  app.kubernetes.io/name: pihole
+              topologyKey: kubernetes.io/hostname
+      containers:
+        - name: pihole
+          image: pihole/pihole:2026.09.0
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: TZ
+              value: America/New_York
+            - name: FTLCONF_dns_upstreams
+              value: 8.8.8.8;8.8.4.4
+            - name: FTLCONF_dns_listeningMode
+              value: all
+            - name: FTLCONF_webserver_api_password
+              valueFrom:
+                secretKeyRef:
+                  name: pihole-secrets
+                  key: web-password
+          ports:
+            - name: dns-tcp
+              containerPort: 53
+              protocol: TCP
+            - name: dns-udp
+              containerPort: 53
+              protocol: UDP
+            - name: http
+              containerPort: 80
+              protocol: TCP
+          readinessProbe:
+            tcpSocket:
+              port: dns-tcp
+            initialDelaySeconds: 5
+            periodSeconds: 5
+          livenessProbe:
+            tcpSocket:
+              port: dns-tcp
+            initialDelaySeconds: 15
+            periodSeconds: 10
+          startupProbe:
+            tcpSocket:
+              port: dns-tcp
+            failureThreshold: 30
+            periodSeconds: 5
+          resources:
+            requests:
+              cpu: 100m
+              memory: 256Mi
+            limits:
+              cpu: 500m
+              memory: 512Mi
+          volumeMounts:
+            - name: pihole-data
+              mountPath: /etc/pihole
+      volumes:
+        # Runtime data is intentionally ephemeral; settings are declared above in Git.
+        - name: pihole-data
+          emptyDir: {}

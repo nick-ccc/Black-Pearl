@@ -1,0 +1,15 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: pihole-admin
+  labels:
+    app.kubernetes.io/name: pihole
+  annotations:
+    tailscale.com/hostname: pihole
+spec:
+  ingressClassName: tailscale
+  defaultBackend:
+    service:
+      name: pihole-admin
+      port:
+        name: http
