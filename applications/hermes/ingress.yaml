@@ -5,6 +5,7 @@ metadata:
   namespace: hermes
   annotations:
     tailscale.com/experimental-forward-cluster-traffic-via-ingress: "true"
+
 spec:
   ingressClassName: tailscale
 

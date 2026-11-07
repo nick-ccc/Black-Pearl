@@ -3,6 +3,9 @@ kind: Kustomization
 
 namespace: hermes-agent
 
+resources:
+  - ingress.yaml
+
 helmCharts:
   - name: hermes-agent
     releaseName: hermes-agent
