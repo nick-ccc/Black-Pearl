@@ -12,6 +12,7 @@ config:
 
   dashboard:
     oauth:
+      provider: self-hosted
       self_hosted:
         # Authentik OIDC issuer URL
         issuer: https://authentik.komodo-salak.ts.net/application/o/hermes-agent/
