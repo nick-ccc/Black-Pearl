@@ -8,6 +8,10 @@ prometheus:
   prometheusSpec:
     retention: 7d
 
+    serviceMonitorSelectorNilUsesHelmValues: false
+    serviceMonitorSelector: {}
+    serviceMonitorNamespaceSelector: {}
+
     resources:
       requests:
         cpu: 200m

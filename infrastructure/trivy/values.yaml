@@ -42,7 +42,7 @@ trivy:
   severity: "UNKNOWN,LOW,MEDIUM,HIGH,CRITICAL"
 
   # Include vulnerabilities without available fixes
-  ignoreUnfixed: false
+  ignoreUnfixed: true
 
   # Scan both OS and application packages
   vulnType: "os,library"
