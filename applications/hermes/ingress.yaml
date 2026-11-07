@@ -15,10 +15,10 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: authentik-server
+                name: hermes-agent
                 port:
                   number: 80
 
   tls:
     - hosts:
-        - authentik
+        - hermes
