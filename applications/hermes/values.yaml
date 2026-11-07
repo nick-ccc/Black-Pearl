@@ -19,15 +19,15 @@ config:
         client_id: iyHcFGzMimGhr2Up5xkurAMBOMeoIpKCJFIDDVD5 # Public ID - safe to commit 
         scopes: "openid profile email"
 
-podSecurityContext:
-  # BUG: 
-  # These result in trying to run the agent as non root, whilst opt/data is owned by UID 0
-  # runAsNonRoot: true
-  # runAsUser: 10000
-  # runAsGroup: 10000
-  # fsGroup: 10000
-  seccompProfile:
-    type: RuntimeDefault
+# podSecurityContext:
+#   # BUG: 
+#   # These result in trying to run the agent as non root, whilst opt/data is owned by UID 0
+#   # runAsNonRoot: true
+#   # runAsUser: 10000
+#   # runAsGroup: 10000
+#   # fsGroup: 10000
+#   seccompProfile:
+#     type: RuntimeDefault
 
 dashboard:
   enabled: true
