@@ -3,9 +3,6 @@ kind: Kustomization
 
 namespace: trivy-security
 
-resources:
-  - ingress.yaml
-
 helmCharts:
   - name: 
     repo: https://aquasecurity.github.io/helm-charts/
