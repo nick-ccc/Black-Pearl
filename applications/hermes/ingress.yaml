@@ -17,7 +17,7 @@ spec:
               service:
                 name: hermes-agent
                 port:
-                  number: 80
+                  number: 9119
 
   tls:
     - hosts:
