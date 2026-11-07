@@ -21,6 +21,12 @@ configMapGenerator:
     options:
       labels:
         grafana_dashboard: "1"
+  - name: cluter-security-trivy
+    files:
+      - dashboards/trivy.json
+    options: 
+      labels:
+        grafana_dashboard: "2"
 
 generators:
   - ksops-config.yaml
