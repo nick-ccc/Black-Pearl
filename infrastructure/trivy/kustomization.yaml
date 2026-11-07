@@ -9,4 +9,4 @@ helmCharts:
     version: 0.38.1
     releaseName: trivy-operator
     valuesFile: values.yaml
-
+    includeCRDs: true
