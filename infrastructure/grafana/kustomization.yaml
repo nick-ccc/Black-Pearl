@@ -26,7 +26,7 @@ configMapGenerator:
       - dashboards/trivy.json
     options: 
       labels:
-        grafana_dashboard: "2"
+        grafana_dashboard: "1"
 
 generators:
   - ksops-config.yaml
