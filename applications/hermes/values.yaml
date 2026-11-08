@@ -15,7 +15,7 @@ config:
       provider: self-hosted
       self_hosted:
         # Authentik OIDC issuer URL
-        issuer: https://authentik.komodo-salak.ts.net/application/o/hermes-agent/
+        issuer: https://authentik.komodo-salak.ts.net/application/o/hermes/
         client_id: iyHcFGzMimGhr2Up5xkurAMBOMeoIpKCJFIDDVD5 # Public ID - safe to commit 
         scopes: "openid profile email"
 
