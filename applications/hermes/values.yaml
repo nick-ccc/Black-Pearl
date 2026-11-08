@@ -19,6 +19,19 @@ config:
         client_id: iyHcFGzMimGhr2Up5xkurAMBOMeoIpKCJFIDDVD5 # Public ID - safe to commit 
         scopes: "openid profile email"
 
+podSecurityContext:
+  seccompProfile:
+    type: RuntimeDefault
+
+securityContext:
+  allowPrivilegeEscalation: false
+  readOnlyRootFilesystem: true
+  capabilities:
+    add:
+      - CHOWN
+    drop:
+      - ALL
+
 # podSecurityContext:
 #   # BUG: 
 #   # These result in trying to run the agent as non root, whilst opt/data is owned by UID 0
