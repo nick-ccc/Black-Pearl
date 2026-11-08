@@ -6,6 +6,27 @@ namespace: hermes
 resources:
   - ingress.yaml
 
+patches:
+  - target:
+      group: apps
+      version: v1
+      kind: Deployment
+      name: hermes-agent
+    patch: |-
+      apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        name: hermes-agent
+      spec:
+        template:
+          spec:
+            initContainers:
+              - name: seed-config
+                securityContext:
+                  capabilities:
+                    add:
+                      - CHOWN
+
 helmCharts:
   - name: hermes-agent
     releaseName: hermes-agent
