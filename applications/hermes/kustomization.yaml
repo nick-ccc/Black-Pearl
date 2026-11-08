@@ -13,19 +13,13 @@ patches:
       kind: Deployment
       name: hermes-agent
     patch: |-
-      apiVersion: apps/v1
-      kind: Deployment
-      metadata:
-        name: hermes-agent
-      spec:
-        template:
-          spec:
-            initContainers:
-              - name: seed-config
-                securityContext:
-                  capabilities:
-                    add:
-                      - CHOWN
+      - op: replace
+        path: /spec/template/spec/initContainers/0/securityContext/capabilities
+        value:
+          add:
+            - CHOWN
+          drop:
+            - ALL
 
 helmCharts:
   - name: hermes-agent
