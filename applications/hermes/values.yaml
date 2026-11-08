@@ -29,7 +29,7 @@ podSecurityContext:
 
 dashboard:
   enabled: true
-  publicUrl: https://hermes-agent.komodo-salak.ts.net
+  publicUrl: https://hermes.komodo-salak.ts.net
   auth:
     provider: oidc
 
