@@ -22,4 +22,4 @@ spec:
 
   tls:
     - hosts:
-        - hermes-agent
+        - hermes
