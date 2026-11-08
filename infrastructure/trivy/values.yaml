@@ -32,6 +32,9 @@ operator:
   # Retain reports for 24 hours
   scannerReportTTL: "24h"
 
+  # Reducing CPU load
+  concurrentScanJobsLimit: 3
+
 trivy:
   createConfig: true
 
@@ -66,4 +69,13 @@ serviceMonitor:
 nodeCollector:
   useNodeSelector: true
   imagePullPolicy: IfNotPresent
+
+resources:
+  requests:
+    cpu: "200m"
+    memory: "512Mi"
+  limits:
+    cpu: "1000m"
+    memory: "1Gi"
+
 
